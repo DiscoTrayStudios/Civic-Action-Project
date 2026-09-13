@@ -36,34 +36,37 @@
     <tbody>
         @foreach (var project in Model.Projects)
         {
-            <tr>
-                <td>@project.Title</td>
-                <td>@project.Organization</td>
-                <td>@project.Hours</td>
-                <td>@project.Start</td>
-                <td>@project.End</td>
-                @if (isAdmin)
-                {
-                    <td>@project.Student?.FirstMidName @project.Student?.LastName</td>
-                }
-                <td>
-                    @if (project.IsApproved)
+            @if (!project.IsArchived)
+            {
+                <tr>
+                    <td>@project.Title</td>
+                    <td>@project.Organization</td>
+                    <td>@project.Hours</td>
+                    <td>@project.Start</td>
+                    <td>@project.End</td>
+                    @if (isAdmin)
                     {
-                        <span class="badge bg-success">Approved</span>
+                        <td>@project.Student?.FirstMidName @project.Student?.LastName</td>
                     }
-                    else if (project.Verifications != null && project.Verifications.Any(v => !v.IsApproved))
-                    {
-                        <span class="badge bg-danger">Denied</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-warning text-dark">Pending Review</span>
-                    }
-                </td>
-                <td>
-                    <a asp-page="./Details" asp-route-id="@project.Id">Details</a>
-                </td>
-            </tr>
+                    <td>
+                        @if (project.IsApproved)
+                        {
+                            <span class="badge bg-success">Approved</span>
+                        }
+                        else if (project.Verifications != null && project.Verifications.Any(v => !v.IsApproved))
+                        {
+                            <span class="badge bg-danger">Denied</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Pending Review</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@project.Id">Details</a>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
