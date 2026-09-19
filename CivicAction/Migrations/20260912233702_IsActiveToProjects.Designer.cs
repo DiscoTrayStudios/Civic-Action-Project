@@ -3,6 +3,7 @@ using System;
 using CivicAction.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CivicAction.Migrations
 {
     [DbContext(typeof(CivicActionContext))]
-    partial class CivicActionContextModelSnapshot : ModelSnapshot
+    [Migration("20260912233702_IsActiveToProjects")]
+    partial class IsActiveToProjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.7");
@@ -115,10 +118,10 @@ namespace CivicAction.Migrations
                     b.Property<double>("Hours")
                         .HasColumnType("REAL");
 
-                    b.Property<bool>("IsApproved")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsArchived")
+                    b.Property<bool>("IsApproved")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsWorkshop")
