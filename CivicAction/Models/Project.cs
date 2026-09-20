@@ -20,6 +20,7 @@ public class Project
     public string StudentID { get; set; }
     public bool IsApproved { get; set; }
     public bool IsWorkshop { get; set; }
+    public bool IsArchived { get; set; }
 
     public AppUser? Student { get; set; }
     public ICollection<Update> Updates { get; set; } = new List<Update>();
