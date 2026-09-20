@@ -45,6 +45,12 @@ To run the program, open a new terminal and type 'dotnet run'.
 
 ## Screenshots
 
+### Application View
+![Application View](./CivicAction/wwwroot/images/image.png)
+
+### Projects
+![Projects](./CivicAction/wwwroot/images/project-screenshot.png)
+
 ### Create a Project
 ![Project Create Inputs](./CivicAction/wwwroot/images/create-screenshot.png)
 
@@ -53,9 +59,3 @@ To run the program, open a new terminal and type 'dotnet run'.
 
 ### Additional Project Details
 ![Additional Project Details](./CivicAction/wwwroot/images/details2-screenshot.png)
-
-### Projects
-![Projects](./CivicAction/wwwroot/images/project-screenshot.png)
-
-### Application View
-![Application View](./CivicAction/wwwroot/images/image.png)
