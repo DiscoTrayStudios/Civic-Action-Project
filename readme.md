@@ -1,33 +1,61 @@
-Civic Action Network Team Contract
-A. Team Structure: 
-1. Leadership structure (individual, individual with rotating leadership, shared): 
-Rotating Leadership (potentially Bi-weekly)
-2. Decision-making policy (by consensus? by majority vote?):
-We will make decesions by consensus and unanimous consent. 
-3. Who is the team Recorder/Documentation Manager/Maintainer of all required turn-ins?
-Dylan will do it. 
-4. Day, time, and place for regular team meetings: 
-Tuesday and Thursday from 2:00 pm - 3:30 pm
-5. Usual method of communication (e.g., e-mail, cell phone, wired phone, in person): 
-Teams chat for online communication and in-person meetings for workshopping the project. 
+# CIVIC ACTION
+## Dylan Carter, Bryson DeLozier, Rayden King, Anthony Sandoval
 
-B. Team Procedures: 
-1. Method for setting and following meeting agendas (Who will set each agenda? When? How will team members be notified/reminded? Who will be responsible for the team following the agenda during a team meeting?): 
-We can each agree on the agenda by consensus and do what works for everybody.
-Weekly meeting times have already been established above; any additional meetings will be discussed and agreed upon before an official meeting. 
-2. Method of record keeping (Who will be responsible for recording and disseminating minutes? How and when will the minutes be disseminated? Where will all agendas and minutes be stored?): We will use the team chat for important information
-3. Procedures in the absence of a team member: (will the team meet with one member absent, or must all members be present?): We will update them on what they missed.
 
-C. Team Participation:
-1. Strategies to ensure cooperation and equal distribution of tasks: 
-We will make sure to be transparent what is expected of each other and work to make sure the work is equal.
-D.Personal Accountability:
-We will make sure to hold each other accountable if a group member is not doing their fair share of the work. We will be sure to clearly communicate our expectations with each other.
+## SUMMARY
+Civic Action helps students document their community service and project work in one place. Students can record volunteer experiences, organize their service by organization, and submit updates for review. Admin users can verify project submissions and approve or reject entries.
 
-Dylan Carter- I will be working the Framework and development portion of this project to help tie the whole thing together. I also will try to help everyone else with anything they need so that we can accomplish our goals in an efficient manner. 
 
-Bryson DeLozier- I will be working on the front-end HTML, CSS, Javascript, and AJAX. Like Dylan, I will also be there to support my group-mates if any issues arise.
+## Features
+- Create and manage student accounts
+- Create, edit, view, and delete volunteer projects
+- Record project titles and descriptions
+- Track volunteer hours
+- Add organization names
+- Record project start and end dates
+- Add updates to existing projects
+- Allow administrators to approve or reject submitted projects
+- Provide feedback on verification requests
 
-Rayden King - I will be designing the Schema for our databases using SQLite and ensure that the relation of the entities will be comprehensible for the other members of the team. I will also support members in the event of a problem.
+## Project Information
+Each volunteer project can include:
 
-Anthony Sandoval - I will be establishing and maintaining the connection to the client, ensuring that all of their ideas get translated properly into our website. I will also be helping my group members in both front-end and back-end work to maintain steady progress and a functional website that meets the client's requests. 
+- Title
+- Description
+- Number of hours
+- Organization name
+- Start date
+- End date
+- Project updates
+- Verification status
+
+Students can continue editing their projects and adding more hours or updates after signing in.
+
+
+## How to run it locally**
+### Prerequisites
+
+Before running the website, install:
+
+- Visual Studio Code
+- C# Dev Kit for Visual Studio Code
+- .NET 10.0 SDK
+
+To run the program, open a new terminal and type 'dotnet run'.
+
+## Screenshots
+
+### Application View
+![Application View](./CivicAction/wwwroot/images/image.png)
+
+### Projects
+![Projects](./CivicAction/wwwroot/images/project-screenshot.png)
+
+### Create a Project
+![Project Create Inputs](./CivicAction/wwwroot/images/create-screenshot.png)
+
+### Project Details
+![Project Details](./CivicAction/wwwroot/images/details-screenshot.png)
+
+### Additional Project Details
+![Additional Project Details](./CivicAction/wwwroot/images/details2-screenshot.png)
