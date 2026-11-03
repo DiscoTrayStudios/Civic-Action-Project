@@ -5,16 +5,20 @@
     ViewData["Title"] = "Index";
 }
 
-@if (User.Identity?.IsAuthenticated == true)
+@if (Model.CurrentUsers?.IsAdmin == false && User.Identity?.IsAuthenticated == true)
 {
     <h1 style = "margin-top: 30px; margin-bottom: 20px"> Got Progress to Share, @Model.CurrentUsers?.FirstMidName? </h1>
+}
+else
+{
+    <h1 style = "margin-top: 30px; margin-bottom: 20px"> Manage Updates </h1>
 }
 
 
 <p>
     <a asp-page="Create">Update</a>
 </p style = "margin-bottom: 20px">
-@if(Model.Update == null || !Model.Update.Any())
+@if(Model.CurrentUsers?.IsAdmin == false && (Model.Update == null || !Model.Update.Any()))
 {
     <div class = "text-center mp-4">
         <img src = "~/images/update.jpg"
