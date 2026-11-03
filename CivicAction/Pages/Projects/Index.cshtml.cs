@@ -32,8 +32,11 @@ namespace CivicAction.Pages.Projects
             CurrentUser = await _userManager.GetUserAsync(User);
             string? userId = _userManager.GetUserId(User);
             IQueryable<Project> projectsIQ = from p in _context.Projects select p;
-            projectsIQ = projectsIQ.Where(p => p.StudentId == userId);
-            Project = await projectsIQ.ToListAsync();
+            if (!CurrentUser.IsAdmin)
+            {
+                projectsIQ = projectsIQ.Where(p => p.StudentId == userId);
+            }
+            Project = await projectsIQ.Include(p => p.Student).ToListAsync();
         }
     }
 }
