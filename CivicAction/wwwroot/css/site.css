@@ -65,10 +65,10 @@ html {
     width: 275px;
   }
 
-  a:link, a:visited { color: black; }
-  a:hover { color: #88D498; text-decoration: underline; }
+  a.nav-link:link, a.nav-link:visited { color: black; }
+  a.nav-link:hover { color: #88D498; text-decoration: underline; }
 
-  button {
+  a.btn-link {
     display: inline-block;
     padding: 10px 16px;
     background-color:#5B095B;
@@ -78,7 +78,7 @@ html {
     text-align: center;
   }
 
-  button:hover, button:focus {
+  a.btn-link:hover, a.btn-link:focus {
     background-color:#88D498;
   }
 

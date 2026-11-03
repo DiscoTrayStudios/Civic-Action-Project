@@ -16,7 +16,7 @@ else
 
 
 <p>
-    <button asp-page="Create">Update</button>
+    <a class="btn-link" asp-page="Create">Update</a>
 </p style = "margin-bottom: 20px">
 @if(Model.CurrentUsers?.IsAdmin == false && (Model.Update == null || !Model.Update.Any()))
 {
@@ -45,7 +45,7 @@ else
                 @Html.DisplayNameFor(model => model.Update[0].HoursDone)
             </th>
             <th style="text-align: center;">
-                Status
+                @Html.DisplayNameFor(model => model.Update[0].Status)
             </th>
             <th></th>
         </tr>
@@ -54,7 +54,7 @@ else
 @foreach (var item in Model.Update) {
         <tr>
             <td>
-                <a asp-page="./Details" asp-route-id="@item.Id">
+                <a class="nav-link" asp-page="./Details" asp-route-id="@item.Id">
                     @Html.DisplayFor(modelItem => item.Project.Title)
                 </a>
             </td>
@@ -68,7 +68,7 @@ else
                 @Html.DisplayFor(modelItem => item.HoursDone)
             </td>
             <td style="text-align: center;">
-                @Html.DisplayFor(modelItem => item.Verification.Id)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id" style="all: unset; cursor: pointer; margin-left: 10px; color: rgb(87, 87, 87);">

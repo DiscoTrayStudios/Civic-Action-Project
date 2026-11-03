@@ -15,6 +15,8 @@ public class Update
     [Required(ErrorMessage = "Hours are required")]
     public double HoursDone { get; set; }
 
+    public Status Status { get; set; }
+
     public int? ProjectId { get; set; }
     public Project? Project { get; set; } 
 

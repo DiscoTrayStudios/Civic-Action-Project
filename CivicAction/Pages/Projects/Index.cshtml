@@ -16,7 +16,7 @@
 
 <p>
 </p>
-    <button asp-page="Create">Add Project</button>
+    <a class="btn-link" asp-page="Create">Add Project</a>
 </p style = "margin-bottom: 30px">
 @if(!Model.CurrentUser.IsAdmin && (Model.Project == null || !Model.Project.Any()))
 {
@@ -49,7 +49,7 @@ else
                     @Html.DisplayNameFor(model => model.Project[0].Start)
                 </th>
                 <th style="text-align: center;">
-                    @Html.DisplayNameFor(model => model.Project[0].IsApproved)
+                    @Html.DisplayNameFor(model => model.Project[0].Status)
                 </th>
                 @if (Model.CurrentUser?.IsAdmin == true)
                 {
@@ -64,7 +64,7 @@ else
     @foreach (var item in Model.Project) {  
             <tr>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@item.Id">
+                    <a class="nav-link" asp-page="./Details" asp-route-id="@item.Id">
                         @Html.DisplayFor(modelItem => item.Title)
                     </a>
                 </td>
@@ -81,7 +81,7 @@ else
                     @Html.DisplayFor(modelItem => item.Start)
                 </td>
                 <td style="text-align: center;">
-                    @Html.DisplayFor(modelItem => item.IsApproved)
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 @if (Model.CurrentUser?.IsAdmin == true)
                 {

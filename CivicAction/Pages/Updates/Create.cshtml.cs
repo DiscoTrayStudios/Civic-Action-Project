@@ -46,6 +46,7 @@ namespace CivicAction.Pages.Updates
             {
                 string? userId = userManager.GetUserId(User);
                 Update.StudentId = userId;
+                Update.Status = Status.Pending;
                 context.Updates.Add(Update);
                 await context.SaveChangesAsync();
             }

@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CivicAction.Models;
 
-public enum ProjectType 
+public enum Status 
 {
-    Individual, Group, Workshop
+    Approved, Pending, Rejected
 }
 
 public class Project
@@ -30,8 +30,7 @@ public class Project
     [Display (Name = "End Date")]
     public DateOnly End { get; set; }
 
-    [Display(Name = "Approved")]
-    public bool IsApproved { get; set; }
+    public Status? Status { get; set; }
 
     [Display(Name = "Workshop")]
     public bool IsWorkshop { get; set; }
