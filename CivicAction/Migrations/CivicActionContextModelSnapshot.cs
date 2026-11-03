@@ -126,10 +126,6 @@ namespace CivicAction.Migrations
                     b.Property<string>("Organization")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("School")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("SiteLocation")
                         .IsRequired()
                         .HasColumnType("TEXT");

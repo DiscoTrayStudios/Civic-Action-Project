@@ -23,7 +23,6 @@ public class Project
 
     [Display(Name = "Site Location")]
     public string SiteLocation { get; set; } = string.Empty;
-    public string School { get; set; } = string.Empty;
     
     [Display (Name = "Start Date")]
     public DateOnly Start { get; set; }

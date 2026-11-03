@@ -18,7 +18,7 @@
 </p>
     <a asp-page="Create">Add Project</a>
 </p style = "margin-bottom: 30px">
-@if(Model.Project == null || !Model.Project.Any())
+@if(!Model.CurrentUser.IsAdmin && (Model.Project == null || !Model.Project.Any()))
 {
     <div class = "text-center my-4">
         <img src ="~/images/Volunteering.webp"
@@ -44,9 +44,6 @@ else
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Project[0].SiteLocation)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Project[0].School)
                 </th>
                 <th style="text-align: center;">
                     @Html.DisplayNameFor(model => model.Project[0].Start)
@@ -77,9 +74,6 @@ else
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SiteLocation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.School)
                 </td>
                 <td style="text-align: center;">
                     @Html.DisplayFor(modelItem => item.Start)
