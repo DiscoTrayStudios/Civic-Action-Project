@@ -23,13 +23,14 @@ namespace CivicAction.Pages.Students
         }
 
         public IList<AppUser> Student { get;set; } = default!;
+        public AppUser? CurrentUser { get; private set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
             string? userId = _userManager.GetUserId(User);
-            AppUser? currentUser = await _userManager.FindByIdAsync(userId);
+            CurrentUser = await _userManager.GetUserAsync(User);
 
-            if (currentUser.IsAdmin)
+            if (CurrentUser?.IsAdmin == true)
             {
                 Student = await _context.AppUsers.ToListAsync();
                 return Page();
