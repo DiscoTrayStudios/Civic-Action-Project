@@ -47,6 +47,8 @@ namespace CivicAction.Pages.Updates
                 string? userId = userManager.GetUserId(User);
                 Update.StudentId = userId;
                 Update.Status = Status.Pending;
+                var thisProject = context.Projects.Where(p => p.Id == Update.ProjectId).FirstOrDefault();
+                thisProject.Status = Status.Pending;
                 context.Updates.Add(Update);
                 await context.SaveChangesAsync();
             }
