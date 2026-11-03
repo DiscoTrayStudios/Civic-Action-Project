@@ -36,7 +36,7 @@ namespace CivicAction.Pages.Projects
             {
                 projectsIQ = projectsIQ.Where(p => p.StudentId == userId);
             }
-            Project = await projectsIQ.ToListAsync();
+            Project = await projectsIQ.Include(p => p.Student).ToListAsync();
         }
     }
 }

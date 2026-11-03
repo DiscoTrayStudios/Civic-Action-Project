@@ -33,9 +33,20 @@
                 <input asp-for="Update.HoursDone" class="form-control" />
                 <span asp-validation-for="Update.HoursDone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            @if (Model.CurrentUser.IsAdmin)
+            {
+                <div class="form-group">
+                    <button type="submit" name="Update.Status" value="Approved" class="btn btn-success">Approve</button>
+                    <button type="submit" name="Update.Status" value="Rejected" class="btn btn-danger">Reject</button>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            }
+
         </form>
     </div>
 </div>

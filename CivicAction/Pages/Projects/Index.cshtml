@@ -39,7 +39,7 @@ else
                 @if (Model.CurrentUser.IsAdmin)
                 {
                     <th>
-                        @Html.DisplayNameFor(model => model.Project[0].StudentId)
+                        Student
                     </th>
                 }
                 <th style="text-align: center;">
@@ -68,7 +68,7 @@ else
                 @if (Model.CurrentUser.IsAdmin)
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudentId)
+                        @Html.DisplayFor(modelItem => item.Student.LastName)
                     </td>
                 }
                 <td style="text-align: center;">

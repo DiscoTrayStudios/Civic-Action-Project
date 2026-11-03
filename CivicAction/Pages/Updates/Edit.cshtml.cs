@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,17 +15,23 @@ namespace CivicAction.Pages.Updates
     public class EditModel : PageModel
     {
         private readonly CivicAction.Data.CivicActionContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public EditModel(CivicAction.Data.CivicActionContext context)
+        public EditModel(CivicAction.Data.CivicActionContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
         public Update Update { get; set; } = default!;
 
+        public AppUser CurrentUser { get; set; } = default!;
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            CurrentUser = await _userManager.GetUserAsync(User);
+
             if (id == null)
             {
                 return NotFound();
@@ -73,6 +80,11 @@ namespace CivicAction.Pages.Updates
         private bool UpdateExists(int id)
         {
             return _context.Updates.Any(e => e.Id == id);
+        }
+
+        private Project ProjectToUpdate(int ProjectId)
+        {
+            return _context.Projects.Single(p => p.Id == ProjectId);
         }
     }
 }
