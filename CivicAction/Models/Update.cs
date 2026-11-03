@@ -13,6 +13,7 @@ public class Update
     public DateOnly Date { get; set; }
     
     [Required(ErrorMessage = "Hours are required")]
+    [Display(Name = "Hours")]
     public double HoursDone { get; set; }
 
     public Status Status { get; set; }
