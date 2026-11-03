@@ -23,14 +23,17 @@ namespace CivicAction.Pages.Updates
         }
 
         public IList<Update> Update { get;set; } = default!;
-        public AppUser? CurrentUsers { get; set; }
+        public AppUser? CurrentUser { get; set; }
 
         public async Task OnGetAsync()
         {   
-            CurrentUsers = await _userManager.GetUserAsync(User);
+            CurrentUser = await _userManager.GetUserAsync(User);
             string? userId = _userManager.GetUserId(User);
             IQueryable<Update> updatesIQ = from u in _context.Updates select u;
-            updatesIQ = updatesIQ.Where(u => u.StudentId == userId);
+            if (!CurrentUser.IsAdmin)
+            {
+                updatesIQ = updatesIQ.Where(u => u.StudentId == userId);
+            }
             Update = await updatesIQ.Include(u => u.Project).Include(u => u.Verification).ToListAsync();
         }
     }
