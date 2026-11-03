@@ -65,7 +65,10 @@ html {
     width: 275px;
   }
 
-  main a {
+  a:link, a:visited { color: black; }
+  a:hover { color: #88D498; text-decoration: underline; }
+
+  button {
     display: inline-block;
     padding: 10px 16px;
     background-color:#5B095B;
@@ -75,7 +78,7 @@ html {
     text-align: center;
   }
 
-  main a:hover, main a:focus {
+  button:hover, button:focus {
     background-color:#88D498;
   }
 
