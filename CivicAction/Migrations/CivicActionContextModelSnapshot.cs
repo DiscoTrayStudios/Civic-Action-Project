@@ -114,9 +114,6 @@ namespace CivicAction.Migrations
                     b.Property<double>("Hours")
                         .HasColumnType("REAL");
 
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsArchived")
                         .HasColumnType("INTEGER");
 
@@ -126,16 +123,15 @@ namespace CivicAction.Migrations
                     b.Property<string>("Organization")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("School")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("SiteLocation")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("Start")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("StudentId")
                         .HasColumnType("TEXT");
@@ -168,6 +164,9 @@ namespace CivicAction.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<int?>("ProjectId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("StudentId")
