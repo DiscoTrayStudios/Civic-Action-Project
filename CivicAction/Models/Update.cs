@@ -10,6 +10,8 @@ public class Update
     
     [Required(ErrorMessage = "Description is required")]
     public string Description { get; set; } = string.Empty;
+
+    public string? Feedback { get; set; } = string.Empty;
     
     [Required(ErrorMessage = "Date is required")]
     public DateOnly Date { get; set; }

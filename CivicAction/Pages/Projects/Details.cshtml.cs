@@ -36,7 +36,7 @@ namespace CivicAction.Pages.Projects
                     .FirstOrDefaultAsync(m => m.Id == id);
             
             var updates = _context.Updates
-                    .Where(u => u.ProjectId == project.Id)
+                    .Where(u => u.ProjectId == project.Id && u.Status == Status.Approved)
                     .ToList();
 
             if (project is not null)
