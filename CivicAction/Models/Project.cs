@@ -39,5 +39,6 @@ public class Project
     [Display(Name = "Archived")]
     public bool IsArchived { get; set; }
 
+    public string? FilePath { get; set; }
     public ICollection<Inclusion> Inclusions { get; set; } = new List<Inclusion>();
 }

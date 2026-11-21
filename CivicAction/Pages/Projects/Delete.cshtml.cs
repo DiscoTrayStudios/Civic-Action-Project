@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CivicAction.Data;
 using CivicAction.Models;
+using Microsoft.CodeAnalysis.Scripting.Hosting;
+using Microsoft.Build.Experimental.ProjectCache;
 
 namespace CivicAction.Pages.Projects
 {
     public class DeleteModel : PageModel
     {
         private readonly CivicAction.Data.CivicActionContext _context;
-
         public DeleteModel(CivicAction.Data.CivicActionContext context)
         {
             _context = context;
@@ -21,6 +22,7 @@ namespace CivicAction.Pages.Projects
 
         [BindProperty]
         public Project Project { get; set; } = default!;
+        
 
         public List<Inclusion> Inclusions { get; set; } = new List<Inclusion>();
 
@@ -52,16 +54,21 @@ namespace CivicAction.Pages.Projects
 
             var project = await _context.Projects.FindAsync(id);
             if (project != null)
-            {
+            {   
                 Project = project;
+                if (true)
+                {
+                    var fileName = Path.GetFileName(project.FilePath);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploadfiles", fileName);
 
-                // First, remove all Inclusions for this project
-                //var inclusions = await _context.Inclusions.
-
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
                 _context.Projects.Remove(Project);
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToPage("./Index");
         }
     }
