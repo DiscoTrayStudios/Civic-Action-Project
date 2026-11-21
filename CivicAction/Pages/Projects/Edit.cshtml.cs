@@ -22,6 +22,15 @@ namespace CivicAction.Pages.Projects
 
         [BindProperty]
         public Project Project { get; set; } = default!;
+        
+        // [BindProperty]
+        // public FileViewModel FileUpload { get; set; } = new();
+
+
+        // public class FileViewModel 
+        // { 
+        // public IFormFile? FormFile { get; set; } 
+        // } 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
