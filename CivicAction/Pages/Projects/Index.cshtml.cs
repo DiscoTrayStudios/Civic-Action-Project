@@ -54,8 +54,14 @@ namespace CivicAction.Pages.Projects
             Project = await projectsIQ.ToListAsync();
         }
 
-        public double GetHours(Project project)
+        public double GetHours(Project project, AppUser appUser)
         {
+            if (!appUser.IsAdmin)
+            {
+                return _context.Updates
+                        .Where(u => u.ProjectId == project.Id && u.Status == Status.Approved && u.StudentId == appUser.Id)
+                        .Sum(u => u.Hours);
+            }
             return _context.Updates
                     .Where(u => u.ProjectId == project.Id && u.Status == Status.Approved)
                     .Sum(u => u.Hours);
