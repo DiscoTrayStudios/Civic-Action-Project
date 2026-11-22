@@ -53,5 +53,102 @@ namespace CivicAction.Pages.Projects
             }
             Project = await projectsIQ.ToListAsync();
         }
+
+        public double GetHours(Project project)
+        {
+            return _context.Updates
+                    .Where(u => u.ProjectId == project.Id && u.Status == Status.Approved)
+                    .Sum(u => u.Hours);
+        }
+
+        public Status GetStatus(Project project)
+        {
+            var updates = _context.Updates.Where(u => u.ProjectId == project.Id);
+            
+            if (updates.Where(u => u.Status == Status.Rejected).Any())
+            {
+                return Status.Rejected;
+            }
+
+            if (updates.Where(u => u.Status == Status.Pending).Any())
+            {
+                return Status.Pending;
+            }
+
+            return Status.Approved;
+        }
+
+        public void SetStatus(Project project)
+        {
+            var updates = _context.Updates.Where(u => u.ProjectId == project.Id);
+            
+            // if one of the updates is rejected, set status to rejected and return
+            if (updates.Where(u => u.Status == Status.Rejected).Any())
+            {
+                project.Status = Status.Approved;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProjectExists(project.Id))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return;
+            }
+
+            // if one of the updates is pending, set status to pending and return
+            if (updates.Where(u => u.Status == Status.Pending).Any())
+            {
+                project.Status = Status.Pending;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProjectExists(project.Id))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return;
+            }
+
+            // otherwise, set status to approved and return
+            project.Status = Status.Approved;
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjectExists(project.Id))
+                {
+                    return;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return;
+        }
+
+        private bool ProjectExists(int id)
+        {
+            return _context.Projects.Any(p => p.Id == id);
+        }
     }
 }

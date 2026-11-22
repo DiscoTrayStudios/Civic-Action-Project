@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using CivicAction.Data;
 using CivicAction.Models;
 
@@ -22,6 +23,13 @@ namespace CivicAction.Pages.Projects
         public Project Project { get; set; } = default!;
 
         public ICollection<Update> Updates { get; set; }
+
+        public double GetHours(Inclusion inclusion)
+        {
+            return _context.Updates
+                    .Where(u => u.StudentId == inclusion.StudentId && u.ProjectId == inclusion.ProjectId && u.Status == Status.Approved)
+                    .Sum(u => u.Hours);
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

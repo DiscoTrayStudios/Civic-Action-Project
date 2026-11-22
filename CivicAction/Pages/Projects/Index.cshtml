@@ -77,7 +77,7 @@ else
                         </td>
                     }
                 <td style="text-align: center;">
-                    @item.Inclusions.Where(i => i.ProjectId == item.Id).Sum(i => i.Hours)
+                    @Model.GetHours(item)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Organization)
@@ -86,7 +86,7 @@ else
                     @Html.DisplayFor(modelItem => item.Start)
                 </td>
                 <td style="text-align: center;">
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Model.GetStatus(item)
                 </td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@item.Id" style="all: unset; cursor: pointer; margin-left: 10px; color: rgb(87, 87, 87);">

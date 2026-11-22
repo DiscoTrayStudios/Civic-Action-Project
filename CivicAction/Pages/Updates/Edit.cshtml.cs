@@ -91,35 +91,7 @@ namespace CivicAction.Pages.Updates
                         }
                     }
                 }
-
-                // Add update hours to the project for this particular student
-                var inclusion = _context.Inclusions.FirstOrDefault(i => i.StudentId == Update.StudentId && i.ProjectId == Update.ProjectId);
-                if (inclusion == null)
-                {
-                    return Page();
-                }
-
-                inclusion.Hours += Update.Hours;
                 
-                _context.Attach(Update).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InclusionExists(Inclusion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                
-
                 _context.Attach(Update).State = EntityState.Modified;
 
                 try
