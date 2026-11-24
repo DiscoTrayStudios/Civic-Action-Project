@@ -25,6 +25,13 @@ namespace CivicAction.Pages.Students
         public IList<AppUser> Students { get;set; } = default!;
         public AppUser? CurrentUser { get; private set; }
 
+        public double GetHours(AppUser appUser)
+        {
+            return _context.Updates
+                    .Where(u => u.StudentId == appUser.Id && u.Status == Status.Approved)
+                    .Sum(u => u.Hours);
+        }
+
         public async Task<IActionResult> OnGetAsync()
         {
             string? userId = _userManager.GetUserId(User);

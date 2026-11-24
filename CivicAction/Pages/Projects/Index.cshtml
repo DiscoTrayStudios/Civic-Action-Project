@@ -14,19 +14,21 @@
     <h1 style = "margin-top: 30px; margin-bottom: 20px" >Welcome, @Model.CurrentUser?.FirstMidName!</h1>
 }
 
+@if (!Model.CurrentUser.IsAdmin)
+{
+    <p>
+        <a class="btn-link" asp-page="Create">Add Project</a>
+    </p style = "margin-bottom: 30px">
+}
 
-<p>
-</p>
-    <a class="btn-link" asp-page="Create">Add Project</a>
-</p style = "margin-bottom: 30px">
 @if (!Model.CurrentUser.IsAdmin && (Model.Project == null || !Model.Project.Any()))
 {
     <div class = "text-center my-4">
         <img src ="~/images/Volunteering.webp"
                 alt = "No Project Illustration"
                 style = "max-width:320px; max-heigh: auto;"/>
-        <h3 style="color: rgb(87, 87, 87);">You don't have any civic projects yet.</h3>
-        <p style="color: rgb(87, 87, 87)" >Get started by adding your first project!</p>
+        <h3 style="color: rgb(87, 87, 87);">You don't have any projects yet.</h3>
+        <p style="color: rgb(87, 87, 87)" >Get started by creating a project!</p>
     </div>
 }
 else
@@ -75,7 +77,7 @@ else
                         </td>
                     }
                 <td style="text-align: center;">
-                    @item.Inclusions.Where(i => i.ProjectId == item.Id).Sum(i => i.Hours)
+                    @Model.GetHours(item, Model.CurrentUser)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Organization)
@@ -84,7 +86,7 @@ else
                     @Html.DisplayFor(modelItem => item.Start)
                 </td>
                 <td style="text-align: center;">
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Model.GetStatus(item)
                 </td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@item.Id" style="all: unset; cursor: pointer; margin-left: 10px; color: rgb(87, 87, 87);">

@@ -51,7 +51,7 @@ namespace CivicAction.Pages.Updates
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(bool approved) //need to link this boolean to the actual buttons
+        public async Task<IActionResult> OnPostAsync(Status status) //need to link this boolean to the actual buttons
         {
             CurrentUser = await _userManager.GetUserAsync(User);
 
@@ -66,7 +66,7 @@ namespace CivicAction.Pages.Updates
                 return NotFound();
             }
 
-            if (approved)
+            if (status == Status.Approved)
             {
                 // This conditional changes the Project's Status to 'Approved' if it doesn't have any more updates
                 if (await NumRemainingUpdates(Update.ProjectId ?? -1) == 1)
@@ -91,35 +91,7 @@ namespace CivicAction.Pages.Updates
                         }
                     }
                 }
-
-                // Add update hours to the project for this particular student
-                var inclusion = _context.Inclusions.FirstOrDefault(i => i.StudentId == Update.StudentId && i.ProjectId == Update.ProjectId);
-                if (inclusion == null)
-                {
-                    return Page();
-                }
-
-                inclusion.Hours += Update.Hours;
                 
-                _context.Attach(Update).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InclusionExists(Inclusion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                
-
                 _context.Attach(Update).State = EntityState.Modified;
 
                 try
@@ -138,10 +110,32 @@ namespace CivicAction.Pages.Updates
                     }
                 }
             }
-            else // if rejected
+            else if (status == Status.Rejected)
             {
                 project.Status = Status.Rejected;
                 Update.Status = Status.Rejected;
+                _context.Attach(Update).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProjectExists(project.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            else // status is pending
+            {
+                project.Status = Status.Pending;
+                Update.Status = Status.Pending;
                 _context.Attach(Update).State = EntityState.Modified;
 
                 try

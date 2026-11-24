@@ -1,4 +1,5 @@
 @page
+@using NuGet.ProjectModel
 @model CivicAction.Pages.Projects.DetailsModel
 
 @{
@@ -40,12 +41,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Project.Start)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.End)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.End)
-        </dd>
         @if (!string.IsNullOrEmpty(Model.Project.FilePath))
         {
             <dt class="col-sm-2">Project Image</dt>
@@ -82,7 +77,7 @@
                 @item.Student.FirstMidName @item.Student.LastName
             </td>
             <td>
-                @item.Hours
+                @Model.GetHours(item)
             </td>
         </tr>
     }
@@ -110,6 +105,12 @@
             </dt>
             <dd class="col-sm-10">
                 @item.Hours
+            </dd>
+            <dt class="col-sm-2">
+                Feedback
+            </dt>
+            <dd class="col-sm-10">
+                @item.Feedback
             </dd>
         </dl>
     </div>
