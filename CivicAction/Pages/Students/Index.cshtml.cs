@@ -27,9 +27,15 @@ namespace CivicAction.Pages.Students
 
         public double GetHours(AppUser appUser)
         {
-            return _context.Updates
+            var updateHours = _context.Updates
                     .Where(u => u.StudentId == appUser.Id && u.Status == Status.Approved)
                     .Sum(u => u.Hours);
+
+            var workshopHours = _context.Inclusions
+                    .Where(i => i.Project.IsWorkshop && i.StudentId.Equals(appUser.Id))
+                    .Sum(i => i.Hours);
+
+            return updateHours + workshopHours;
         }
 
         public async Task<IActionResult> OnGetAsync()
