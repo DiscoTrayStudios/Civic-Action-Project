@@ -58,6 +58,10 @@ namespace CivicAction.Pages.Projects
         {
             if (!appUser.IsAdmin)
             {
+                if (project.IsWorkshop)
+                {
+                    return _context.Inclusions.Where(i => i.ProjectId == project.Id && i.StudentId.Equals(appUser.Id)).Sum(i => i.Hours);
+                }
                 return _context.Updates
                         .Where(u => u.ProjectId == project.Id && u.Status == Status.Approved && u.StudentId == appUser.Id)
                         .Sum(u => u.Hours);
